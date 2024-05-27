@@ -2,21 +2,24 @@ package org.example;
 
 public class Main {
     public static void main(String[] args) {
+        if (args.length != 0) {
 
-        System.out.println(calculate(Integer.parseInt(args[0]), Integer.parseInt(args[1]), args[2]));
-    }
+            switch (args[2]) {
+                case "+" -> System.out.println(Integer.parseInt(args[0]) + Integer.parseInt(args[1]));
+                case "*" -> System.out.println(Integer.parseInt(args[0]) * Integer.parseInt(args[1]));
+                case "-" -> System.out.println(Integer.parseInt(args[0]) - Integer.parseInt(args[1]));
+                case "/" -> {
+                    if (Integer.parseInt(args[1]) == 0) {
+                        System.out.println("Division by 0!");
+                    } else {
+                        System.out.println(Integer.parseInt(args[0]) / Integer.parseInt(args[1]));
+                    }
+                }
+                default -> {
+                    System.out.println("Unknown operator");
+                }
+            };
+        }
 
-    public static int calculate(int a, int b, String operator) {
-        return switch (operator) {
-            case "+" -> a + b;
-            case "-" -> a - b;
-            case "*" -> a * b;
-            case "/" -> {
-                if (b == 0)
-                    throw new IllegalArgumentException("Division by zero");
-                yield a / b;
-            }
-            default -> throw new IllegalArgumentException("Unknown operator: " + operator);
-        };
     }
 }
